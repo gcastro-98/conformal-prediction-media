@@ -1,0 +1,39 @@
+name: Compile LaTeX documents & deploy page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      id: checkout
+      uses: actions/checkout@v2
+      
+    - name: Set up LaTeX environment
+      id: set-up-env
+      uses: dante-ev/latex-action@v2
+
+    - name: Compile thesis LaTeX file to PDF
+      id: thesis-compile
+      run: latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make thesis.tex
+
+    - name: Compile presentation LaTeX file to PDF
+      id: presentation-compile
+      run: latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make slides.tex
+
+    - name: Move PDFs to "docs/" directory
+      id: move-pdf
+      run: mkdir -p docs/ &&  mv thesis.pdf slides.pdf docs/
+
+    - name: Deploy to GitHub Pages
+      id: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.DEPLOYMENT_TOKEN }}
+        publish_dir: ./docs

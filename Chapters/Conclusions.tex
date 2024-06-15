@@ -1,0 +1,45 @@
+\chapter{Conclusions}\label{chap:conclusions}
+
+Throughout this work, several methods have been theoretically justified and successfully applied to quantify the prediction uncertainty both for regression and time series problem. These strategies are distribution-free \& model-agnostic and stem from the notion of "\textit{conformalizing}" predictions to data and using the residuals to understand the errors distribution. That is why they are grouped within the so-called "conformal prediction" (CP) methodologies.\\
+
+Even though CP paradigm was classically applied only under "\textit{data exchangeability}" conditions, this work has reviewed some of the most recent \& non-trivial efforts to enable CP when this hypothesis is not fulfilled. 
+
+In particular, while SCP, CV$+$, J$+$aB \& CQR were studied for the exchangeable case; regarding the time series case, "\textit{EnbPI}" (\cite{chenxu2021a}) was presented as the strategy to effectively obtain prediction intervals with statistically valid coverage.
+
+While all the former strategies were successfully applied to practical case, generally providing valid intervals, below the more fine-grained conclusions are listed:
+\begin{itemize}
+    \item \textbf{Exchangeable case} (regression problem):
+    \begin{itemize}
+        \item The best strategies, \textbf{decreasingly ordered} by:
+        \begin{itemize}
+            \item \textit{Statistical efficiency} are: CQR, SCP, CV$+$, J$+$aB. This is fulfilled independently of $\a$.
+            \item \textit{Computational efficiency} are: SCP, CQR, CV$+$, J$+$aB.
+            \item \textit{Predictive power} are: CV$+$ \& J$+$aB, SCP, CQR.
+            \item "\textit{Informativeness}" (coverage-width ratio) are: J$+$aB, SCP, CQR, CV$+$.
+            \item \textit{Adaptability} are: CQR, CV$+$, J$+$aB (slight to none). Contrarily, SCP intervals are not adaptive at all. 
+        \end{itemize}
+        \item \textbf{CQR} seems the best \textbf{strategy} to achieve the best \textbf{marginal} \& \textbf{conditional coverage}, when dataset is large enough. 
+
+        Thus, it may result suitable when a conservative and statistical efficient tool is needed.
+        \item \textbf{J$+$aB} seems the best \textbf{strategy} to achieve the best \textbf{informative intervals} (maximizing predictive power, while minimizing intervals width), at expenses of no-adaptability \& losing some coverage. 
+        
+        Thus, it may result suitable when more reckless guesses can be afforded and low training \& inference times are not a requirement.
+    \end{itemize}
+    \item \textbf{Non-exchangeable case} (time series problem):
+    \begin{itemize}
+        \item \textbf{EnbPI} is a \textbf{suitable option} to provide valid intervals for \textbf{time series problems}.
+        \item In general, and particularly when there might be strong shifts in data, EnbPI's intervals adjustment using test residuals (its "partial fit" feature) is of crucial importance.
+        \item This "\textbf{partial fit}" option will not only allow the intervals' coverage \textbf{recover from change points}, but also will allow all the issued \textbf{intervals} to be \textbf{adaptive}.
+    \end{itemize}
+\end{itemize} 
+
+\section{Further research}\label{sec:further-research}
+
+There a huge number of relevant other inquiries and research lines which could extend this work, but were out of the scope of this thesis. 
+Below, some of them are reviewed: 
+\begin{itemize}
+\item Leverage cross-validation folds in the CQR strategy, instead of a simple train-test split of the dataset, to improve the predictive power and reduce the need of a large dataset. 
+\item Implement other contemporary CP methodologies for time series problems, such as \textit{Adaptive Conformal Inference}, ACI (\cite{gibbs2021}) and the more recent \textit{Hopfield Conformal Prediction Trees}, HopCPT (\cite{auer2023}); in order to compare performance differences and their suitability.
+\item Extend all these methods to the multi-dimensional output variables' case, to broaden their applicability to multi-output regression \& time series problems.
+\item Apply the former methodologies to classification problems (discrete target variables) and discuss whether similar conclusions to their continuous counter-part can be drawn.
+\end{itemize}

@@ -1,0 +1,184 @@
+\chapter{Beyond exchangeability}\label{chap:exchangeability}
+
+As discussed in chapters \ref{chap:intro} \& \ref{chap:conformal-prediction}, the (data) exchangeability assumption is crucial as it ensures the error rates of the predictions are controlled across all possible partitions of the data. However, real-world data often challenge this assumption, presenting scenarios where exchangeability is not preserved.
+
+In particular, we can distinguish two principal cases where exchangeability fails: distribution shifts and auto-correlation.\\
+
+On one hand, distribution shifts occur when the process generating the test data differs from the process that generated the training data. These shifts can significantly impact the performance of predictive models, not only by rendering the previously learned patterns obsolete or less effective; but also in the CP case, by affecting the distribution of error rates.
+
+For instance, some common types of shifts are: 
+\begin{itemize}
+    \item \textbf{Covariate shift}: changes in the input features' distribution.
+    \item \textbf{Label shift}: changes in the target variable's distribution.
+\end{itemize}
+
+On the other hand, when there is auto-correlation between samples, training and calibration samples might be similar in such a way the model error rates is not evenly distributed. For instance, in the case of time series and their temporal nature of data. 
+
+In this chapter, we delve into the application of CP in such contexts. In particular, in sections \ref{sec:covariate-shift} and \ref{sec:label-shift} we review the heuristic ideas on how to make CP to work under shifts in data distribution (covariate \& label shifts, respectively). Then, in section \ref{sec:time-series}, we present how can CP be adapted to work with time series data.
+
+%Nevertheless, the theoretical guarantees of CP beyond the exchangeability assumption are out of the scope of this work. If the reader is interested, though, we refer them to the major results (cited by \cite{cptuto} too):
+%\begin{itemize}
+%    \item \cite{chernozhukov2018}: if the learnt model is accurate and the data noise is strongly mixing, then CP is asymptotically valid.
+%    \item \cite{barber2022}: it proposes a new algorithm based in re-weighting, as well as it quantifies the coverage loss depending on the strength of the "exchangeability violation".
+%\end{itemize}
+
+\section{Covariate shift}\label{sec:covariate-shift}
+
+Covariate shift describes the phenomenon by which the input features' distribution has suffered changes $P_X\rightarrow \Tilde{P}_X$.
+ 
+Thus, within this case, we can formally state the following setting:
+\begin{itemize}
+    \item $\{\left(X_i, Y_i\right)\}_{i=1}^n \overset{\mathrm{exch.}}{\sim} P_X\times P_{Y|X}$
+    \item $\left(X_{n+1}, Y_{n+1}\right) \sim \Tilde{P}_X\times P_{Y|X}$
+\end{itemize}
+
+Then, the heuristic idea in order to keep the error rates of the predictions somewhat controlled is to give more "relevance" to those calibration points that are closer in distribution to the test point. 
+
+In practice, this can be translated in the following algorithm:
+\begin{enumerate}
+    \item Estimate how "close" a sample $X_i$ ($\sim P_X$) is \textit{w.r.t.} to the test point ($\sim \Tilde{P}_X$) using the likelihood ratio: $w(X_i):= \frac{d\Tilde{P}_X(X_i)}{dP_X(X_i)}$.
+    \item Normalize the weights: $\omega_i:=\frac{w(X_i)}{\sum_{j=1}^{n+1} w(X_j)}$. 
+    \item Build the predictive interval $\Ca$ using the weighted calibration samples:
+    \begin{equation}\label{eq:cp-covariate}
+        \Hat{\Ca}\left(X_{n+1}\right) = \{ Y: \ s_{\Hat{\mu}}\left(X_{n+1}, Y\right) \leq q_{1-\a}\left(\{\omega_i S_i\}_{i\in\rm{Cal}}\right)  \}
+    \end{equation} 
+\end{enumerate}
+
+This approach not only works in practice, but also theoretically attains \textbf{at least} $1-\a$ coverage if the samples are \textit{i.i.d.} drawn, as announced by Theorem \ref{thm:cp-covariate}:
+
+\begin{theorem}[CP guarantees under covariate shift]\label{thm:cp-covariate} Suppose $\{\left(X_i, Y_i\right)\}_{i=1}^n$ are drawn \textit{i.i.d.} from $P_X \times P_{Y \mid X}$, and $\left(X_{n+1}, Y_{n+1}\right)$ is drawn independently from $\Tilde{P}_{X} \times P_{Y \mid X}$. Then, $\Hat{\Ca}$ from \ref{eq:cp-covariate} is such that:
+$$
+\mathbb{P}\left(Y_{n+1} \in \Hat{\Ca}\left(X_{n+1}\right)\right) \geq 1-\alpha .
+$$
+\end{theorem}
+
+Further details of the implementation and theoretical guarantees can be found at \cite{tibshirani}.
+
+\section{Label shift}\label{sec:label-shift}
+
+Label shift refers to the change in the target variable's distribution $P_Y\rightarrow \Tilde{P}_Y$.
+ 
+Formally, thus, this case can be stated as it follows:
+\begin{itemize}
+    \item $\{\left(X_i, Y_i\right)\}_{i=1}^n \overset{\mathrm{exch.}}{\sim} P_{X|Y}\times P_{Y}$
+    \item $\left(X_{n+1}, Y_{n+1}\right) \sim P_{X|Y}\times \Tilde{P}_{Y}$
+\end{itemize}
+
+The essential idea here is analogous to section \ref{sec:covariate-shift}: to give more "relevance" to those calibration points that are closer to the test point; with the added difficulty, however, that for a new sample $X_{n+1}$, its label $Y_{n+1}$ is unknown.
+
+In practice, this can be circumvented letting the weights $\omega_i$ as function of $Y$:
+\begin{enumerate}
+    \item Estimate how "close" a label $Y_i$ ($\sim P_Y$) is \textit{w.r.t.} to the hypothetical point ($\sim \Tilde{P}_Y$) using the likelihood ratio: $w(Y_i):= \frac{d\Tilde{P}_Y(Y_i)}{dP_Y(Y_i)}$.
+    \item Normalize the weights: $\omega_i^Y:=\frac{w(Y_i)}{\sum_{j=1}^{n} w(Y_j) + w(Y)}$. 
+    \item Build the predictive interval $\Ca$ traversing all the variable output's space and using the weighted calibration samples:
+    \begin{equation}\label{eq:cp-label}
+    \Hat{\Ca}\left(X_{n+1}\right) = \{ Y: \ s_{\Hat{\mu}}\left(X_{n+1}, Y\right) \leq q_{1-\a}\left(\{\omega^Y_i S_i\}_{i\in\rm{Cal}}\right)  \}
+    \end{equation}
+\end{enumerate}
+
+For a more exhaustive overview, the user can refer to \cite{podkopaev}. Apart from a detailed implementation of the procedure, the author adapts the covariate-shift results of \cite{tibshirani} (based on the "\textit{weighted exchangeability}" concept) into this label-shift case through Theorem \ref{thm:cp-label}:
+
+\begin{theorem}[CP guarantees under label shift]\label{thm:cp-label} Suppose $\{\left(X_i, Y_i\right)\}_{i=1}^n$ are drawn \textit{i.i.d.} from $P_{X\mid Y} \times P_{Y}$, $\left(X_{n+1}, Y_{n+1}\right)$ is drawn independently from ${P}_{X\mid Y} \times \Tilde{P}_{Y}$ and the true likelihood ratios $\omega_i^y$ are known for all $Y$. Then, $\Hat{\Ca}$ from \ref{eq:cp-label} is such that:
+$$
+\mathbb{P}\left(Y_{n+1} \in \Hat{\Ca}\left(X_{n+1}\right)\right) \geq 1-\alpha .
+$$
+\end{theorem}
+
+\section{Conformal prediction for time-series}\label{sec:time-series}
+
+Time series are, in general, a great example of data with strong auto-correlation amongst samples. Examples abound \textit{e.g.} in financial markets (stock prices are influenced by their historical values) or in meteorology (with spatial auto-correlation as well, since weather conditions are influenced by their own regimes and variability modes).\\
+
+In this case we have a setup such that $Y_t = \mu\left(X_t\right) + \epsilon_t$, where $\epsilon_t$ are identically distributed according to a common cumulative distribution function $F$. Assuming the first $T$ sample points $\{\left(X_t, Y_t\right)_{t=1}^T\}$ are training data, we want to construct a sequence of $s\geq 1$ prediction intervals of $\a$ miscoverage level, $\{\mathcal{C}^\alpha_{T,T+i}\}_{i=1}^s$, for the unknown labels $\{{Y}^\alpha_{T+i}\}_{i=1}^s$ (being $s$ a fixed batch size corresponding to how many steps we want to look ahead). 
+
+Once new samples $\{\left(X_{T+i}, Y_{T+i}\right)\}_{i=1}^s$ become available, we would like to also leverage them using the most recent $T+s$ points for the predictive intervals of $Y_j$ for $j=T+s+1$ onward.\\
+
+We will focus on the so-called "\textit{EnbPI}" methodology, proposed by \cite{chenxu2021a}, which allows the use of CP when there is samples auto-correlation, particularly specializing in the case of time series.
+
+This flavour resembles the "\textit{Jackknife+ after bootstrap}" technique (\cite{byol}), in the sense it applies CP to ensemble methods; but unlike the former work, EnbPI does not assume exchangeability and it does leverage new (sequentially) revealed observations.
+
+Yet, as in section \ref{sec:other-flavours}, the $i$-th "leave-one-out" (LOO) estimator\footnote{Note its training data, then, will include the rest of $T-1$ points and just exclude the $i$-th $(X_i, Y_i)$ point).} of $\mu$ will be denoted by $\Hat{\mu}_{-i}$.\\
+
+Besides, as discussed below, EnbPI has several other benefits: it requires no data-splitting, avoids model overfitting and does not refit models during test time.
+
+\subsection{EnbPI implementation}\label{subsec:enbpi-implementation}
+
+Below, it is listed the essential idea which EnbPI algorithm\footnote{We no longer use $S$ for the conformity scores, but for the $S$ index sets. In EnbPI, the idea of conformity score is represented through $\epsilon$ and $w$.} uses to return the $T_1$ future predictive intervals (indices $T+1, \ldots, T+T_1$; as there are $T$ training samples):
+\begin{itemize}
+    \item Obtain $B$ bootstrapped models (henceforth denoted by $\mu^b$) by:
+    \begin{itemize}
+        \item Sampling, with replacement, an index set $S_b:=\left(i_1,\ldots, i_T\right)$ from indices $(1,\ldots,T)$.
+        \item Fit the bootstrapped model, with $S_b$: $$\hat{\mu}^b(\cdot) \leftarrow \mathcal{A}\left(\left\{\left(X_i,Y_i\right), i \in S_b\right\}\right)\ .$$
+    \end{itemize}
+    \item For each $i$ of the $T$ training samples, aggregate the bootstrapped models (with an aggregation function denoted $\phi$) obtaining: $\Hat{\mu}^\phi_{-i}$. Then, compute the conformity scores using the absolute residual: $\epsilon_i^{\phi}:=\left|Y_i-\Hat{\mu}^\phi_{-i}(X_i)\right|$.
+    \item For each $t$ of the future $T_1$ timestamps (test data), return in a $s$-sized batch the predictive interval: $$ \Hat{\mathcal{C}}_{T, t}^{\alpha}\left(X_t\right) = \left[\Hat{\mu}^\phi_{-t}(X_t) - w_t^\phi,\ \Hat{\mu}^\phi_{-t}(X_t) + w_t^\phi \right],$$
+    where: 
+    \begin{itemize}
+        \item $\Hat{\mu}^\phi_{-t}(X_t)$ is the $1-\a$ quantile of $\{\Hat{\mu}^\phi_{-i}(X_t)\}_{i=1}^T$. 
+        \item $w_t^\phi$ is the $1-\a$ quantile of $\{\epsilon_{i}^\phi \}_{i=1}^T$.
+    \end{itemize}
+    \item Lastly, note this interval's retrieval is made sequentially using "batch". This means that, for each $s$ returned intervals, the conformity score $w^\phi_t$ will be re-computed leveraging the most recent observations as well (steps 15-19 in Algorithm \ref{alg:EnbPI}). 
+\end{itemize}
+
+More formally, the algorithm is adapted from \cite{chenxu2021a} and stated in Algorithm \ref{alg:EnbPI}.
+
+Note the authors later proposed, in \cite{chenxu2021b}, a slight modification in the calculation of $\Hat{\mu}^\phi_{-t}(X_t)$ (leveraging $\phi$) and $w_t^\phi$ (introducing a new quantity $\Hat{\beta}$ to affect the quantile level).
+
+% \textcolor{red}{Should I mention the 'online setting SCP' (OSSCP), as \cite{cptuto} last slide \& \cite{zaffran2022}? In that case, I should mention it is not as good as '\textit{EnbPI}' which is specially for time series.} 
+
+\begin{algorithm}
+\caption{EnbPI algorithm}\label{alg:EnbPI}
+\begin{algorithmic}[1] 
+\REQUIRE Regression algorithm $\A$, miscoverage level $\a$, aggregation function $\phi$, number of bootstrap models $B$, batch size $s$, training data $\{\left(X_i,Y_i\right)\}^{T}_{i=1}$ and test data $\{\left(X_t,Y_t\right)\}^{T+T_1}_{t=T+1}$ with $Y_t$ revealed only after the batch of $s$ prediction intervals with $t$ in the batch are constructed. 
+\ENSURE Ensemble prediction interval $\{ \Hat{\mathcal{C}}_{T, t}^{\alpha}\left(X_t\right) \}^{T+T_1}_{t=T+1}$. 
+
+\FOR {$b=1,\ldots, B$}
+\STATE Sample with replacement an index set $S_b=\left(i_1, \ldots, i_T\right)$ from indices $(1, \ldots, T)$
+\STATE Compute $\hat{\mu}^b(\cdot) \leftarrow \mathcal{A}\left(\left\{\left(X_i,Y_i\right), i \in S_b\right\}\right)$.
+\ENDFOR
+
+\STATE Initialise $\epsilon = \{\}$
+\FOR {$i=1,\ldots, T$}
+\STATE $\hat{\mu}_{-i}^{\phi}\left(X_i\right)=\phi\left(\left\{\hat{\mu}^b\left(X_i\right) \mid i \notin S_b\right\}\right)$
+\STATE Compute $\hat{\epsilon}_i^{\phi}=\left|Y_i-\hat{\mu}_{-i}^{\phi}\left(X_i\right)\right|$
+
+\STATE $\epsilon=\epsilon \cup\left\{\hat{\epsilon}_i^{\phi}\right\}$
+\ENDFOR
+
+\FOR {$t=T+1,\ldots, T+T_1$}
+\STATE Let $\hat{\mu}_{-t}^{\phi}\left(X_t\right)=(1-\alpha)$ quantile of $\left\{\hat{\mu}_{-i}^{\phi}\left(X_t\right)\right\}_{i=1}^T$
+%\hspace{4mm} \textcolor{magenta}{EnbPI V2: this is replaced by $\hat{\mu}_{-t}^{\phi}\left(X_t\right)=\phi\left(\left\{\hat{\mu}_{-i}^{\phi}\left(X_t\right)\right\}_{i=1}^T\right)$.}
+\STATE Let $w_t^{\phi}=(1-\alpha)$ quantile of $\epsilon$
+\STATE Return $\Hat{\mathcal{C}}_{T, t}^{\alpha}\left(X_t\right)=\left[\hat{\mu}_{-t}^{\phi}\left(X_t\right) \pm w_t^{\phi}\right]$
+
+\IF {$t-T=0\ \mathrm{mod}\ s$}
+\FOR {$j=t-s,\ldots, t-1$}
+\STATE Compute $\hat{\epsilon}_j^{\phi}=\left|Y_j-\hat{\mu}_{-j}^{\phi}\left(X_t\right)\right|$
+\STATE $\epsilon=\left(\epsilon-\left\{\hat{\epsilon}_1^{\phi}\right\}\right) \cup\left\{\hat{\epsilon}_i^{\phi}\right\}$ and reset index of $\epsilon$
+\ENDFOR
+\ENDIF
+\ENDFOR
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Theoretical guarantees}\label{subsec:enbpi-guarantees}
+
+An exhaustive review of the theoretical proofs of EnbPI coverage is much beyond of the scope of this work.
+
+Nevertheless, the reader can refer to \cite{chenxu2021b} where the main results are provided.
+
+In particular, conditional coverage is attained not in an absolute sense but in an asymptotic sense; all this up to two hypotheses:
+\begin{itemize}
+    \item Errors are short-term \textit{i.i.d} (independent and identically distributed) according to a common CDF Lipschitz continuous. See Assumption 1 of \cite{chenxu2021b}.
+    \item Estimation quality (Assumption 2): there exists a real sequence $\{\delta_T\}_{T>0}$ that converges to zero such that:
+    \begin{align*}
+        & \frac{1}{T} \sum_{t=1}^T\left(\hat{\mu}_{-t}\left(X_t\right)-\mu\left(X_t\right)\right)^2\geq \delta_T^2\ \mathrm{ and } \\ 
+        & \left|\hat{\mu}_{-t}\left(X_{T+1}\right)-\mu \left(X_{T+1}\right)\right| \leq \delta_T.
+    \end{align*}
+\end{itemize}
+
+As discussed, these are mild assumptions. However, since are talking about asymptotic coverage, notice the coverage level depends on the size of the training set and on $\left(\delta_T\right)_{T>0}$. 
+
+Furthermore, though weaker, the authors also present a theorem showing marginal asymptotic coverage is sought too. 
+
+The proof (see Appendix A of \cite{chenxu2021b}) removes the assumptions on data exchangeability by replacing them with general and verifiable assumptions on the error process and estimation quality. Without loss of generality, just guarantees are shown for $t = T +1$ (one-step-ahead prediction); but, in Remark 1, it is explained how it can be extended to $t = T +2,\ldots,T+T_1$.

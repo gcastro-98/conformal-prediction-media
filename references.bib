@@ -1,0 +1,439 @@
+@inproceedings{auer2023,
+ author = {Auer, Andreas and Gauch, Martin and Klotz, Daniel and Hochreiter, Sepp},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {A. Oh and T. Naumann and A. Globerson and K. Saenko and M. Hardt and S. Levine},
+ pages = {56027--56074},
+ publisher = {Curran Associates, Inc.},
+ title = {Conformal Prediction for Time Series with Modern Hopfield Networks},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2023/file/aef75887979ae1287b5deb54a1e3cbda-Paper-Conference.pdf},
+ volume = {36},
+ year = {2023}
+}
+
+@article{koenker,
+ ISSN = {00129682, 14680262},
+ URL = {http://www.jstor.org/stable/1913643},
+ abstract = {A simple minimization problem yielding the ordinary sample quantiles in the location model is shown to generalize naturally to the linear model generating a new class of statistics we term "regression quantiles." The estimator which minimizes the sum of absolute residuals is an important special case. Some equivariance properties and the joint asymptotic distribution of regression quantiles are established. These results permit a natural generalization of the linear model of certain well-known robust estimators of location. Estimators are suggested, which have comparable efficiency to least squares for Gaussian linear models while substantially out-performing the least-squares estimator over a wide class of non-Gaussian error distributions.},
+ author = {Roger Koenker and Gilbert Bassett},
+ journal = {Econometrica},
+ number = {1},
+ pages = {33--50},
+ publisher = {[Wiley, Econometric Society]},
+ title = {Regression Quantiles},
+ urldate = {2024-04-27},
+ volume = {46},
+ year = {1978}
+}
+
+@misc{mapie:scores,
+  author = "{MAPIE developers}",
+  title = "{Theoretical Description for Conformity Scores - MAPIE Documentation}",
+  year = "2024",
+  url = "https://mapie.readthedocs.io/en/stable/theoretical_description_conformity_scores.html",
+  note = "[Online; accessed 2024/03/25]"
+}
+
+@online{cptuto,
+  author = "Margaux Zaffran",
+  title = "Introduction to Conformal Prediction",
+  year = "2023",
+  url = "https://conformalpredictionintro.github.io/assets/files/cptuto.pdf",
+  note = "[Online; accessed 25-March-2024]"
+}
+
+@article{gentleintro,
+  author       = {Anastasios N. Angelopoulos and
+                  Stephen Bates},
+  title        = {A Gentle Introduction to Conformal Prediction and Distribution-Free
+                  Uncertainty Quantification},
+  journal      = {CoRR},
+  volume       = {abs/2107.07511},
+  year         = {2021},
+  url          = {https://arxiv.org/abs/2107.07511},
+  eprinttype    = {arXiv},
+  eprint       = {2107.07511},
+  timestamp    = {Wed, 21 Jul 2021 15:55:35 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2107-07511.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@misc{romano2019,
+      title={Conformalized Quantile Regression}, 
+      author={Yaniv Romano and Evan Patterson and Emmanuel J. Candès},
+      year={2019},
+      eprint={1905.03222},
+      archivePrefix={arXiv},
+      primaryClass={stat.ME}
+}
+
+@InProceedings{papadopoulos,
+author="Papadopoulos, Harris
+and Proedrou, Kostas
+and Vovk, Volodya
+and Gammerman, Alex",
+editor="Elomaa, Tapio
+and Mannila, Heikki
+and Toivonen, Hannu",
+title="Inductive Confidence Machines for Regression",
+booktitle="Machine Learning: ECML 2002",
+year="2002",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="345--356",
+abstract="The existing methods of predicting with confidence give good accuracy and confidence values, but quite often are computationally inefficient. Some partial solutions have been suggested in the past. Both the original method and these solutions were based on transductive inference. In this paper we make a radical step of replacing transductive inference with inductive inference and define what we call the Inductive Confidence Machine (ICM); our main concern in this paper is the use of ICM in regression problems. The algorithm proposed in this paper is based on the Ridge Regression procedure (which is usually used for outputting bare predictions) and is much faster than the existing transductive techniques. The inductive approach described in this paper may be the only option available when dealing with large data sets.",
+isbn="978-3-540-36755-0"
+}
+
+@inbook{vovk2005,
+author = {Vovk, Vladimir and Gammerman, Alex and Shafer, Glenn},
+year = {2005},
+month = {01},
+pages = {},
+title = {Algorithmic Learning in a Random World},
+journal = {Algorithmic Learning in a Random World},
+doi = {10.1007/b106715}
+}
+
+@Article{lei2018,
+  author={Jing Lei and Max G’Sell and Alessandro Rinaldo and Ryan J. Tibshirani and Larry Wasserman},
+  title={{Distribution-Free Predictive Inference for Regression}},
+  journal={Journal of the American Statistical Association},
+  year=2018,
+  volume={113},
+  number={523},
+  pages={1094-1111},
+  month={7},
+  keywords={},
+  doi={10.1080/01621459.2017.130},
+  abstract={ We develop a general framework for distribution-free predictive inference in regression, using conformal inference. The proposed methodology allows for the construction of a prediction band for the response variable using any estimator of the regression function. The resulting prediction band preserves the consistency properties of the original estimator under standard assumptions, while guaranteeing finite-sample marginal coverage even when these assumptions do not hold. We analyze and compare, both empirically and theoretically, the two major variants of our conformal framework: full conformal inference and split conformal inference, along with a related jackknife method. These methods offer different tradeoffs between statistical accuracy (length of resulting prediction intervals) and computational efficiency. As extensions, we develop a method for constructing valid in-sample prediction intervals called rank-one-out conformal inference, which has essentially the same computational efficiency as split conformal inference. We also describe an extension of our procedures for producing prediction bands with locally varying length, to adapt to heteroscedasticity in the data. Finally, we propose a model-free notion of variable importance, called leave-one-covariate-out or LOCO inference. Accompanying this article is an R package conformalInference that implements all of the proposals we have introduced. In the spirit of reproducibility, all of our empirical results can also be easily (re)generated using this package.},
+  url={https://ideas.repec.org/a/taf/jnlasa/v113y2018i523p1094-1111.html}
+}
+
+@misc{zaffran2022,
+      title={Adaptive Conformal Predictions for Time Series}, 
+      author={Margaux Zaffran and Aymeric Dieuleveut and Olivier Féron and Yannig Goude and Julie Josse},
+      year={2022},
+      eprint={2202.07282},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
+
+@article{vovk2015,
+  author    = {Vladimir Vovk},
+  title     = {Cross-conformal predictors},
+  journal   = {Annals of Mathematics and Artificial Intelligence},
+  year      = {2015},
+  volume    = {74},
+  number    = {1},
+  pages     = {9-28},
+  month     = {6},
+  doi       = {10.1007/s10472-013-9368-4},
+  url       = {https://doi.org/10.1007/s10472-013-9368-4},
+  abstract  = {Inductive conformal predictors have been designed to overcome the computational inefficiency exhibited by conformal predictors for many underlying prediction algorithms. Whereas computationally efficient, inductive conformal predictors sacrifice different parts of the training set at different stages of prediction, which affects their informational efficiency. This paper introduces the method of cross-conformal prediction, which is a hybrid of the methods of inductive conformal prediction and cross-validation, and studies its validity and informational efficiency empirically. The computational efficiency of cross-conformal predictors is comparable to that of inductive conformal predictors, and they produce valid predictions in our empirical studies.},
+  issn      = {1573-7470}
+}
+
+@article{barber2021a,
+    author = {Foygel Barber, Rina and Candès, Emmanuel J and Ramdas, Aaditya and Tibshirani, Ryan J},
+    title = "{The limits of distribution-free conditional predictive inference}",
+    journal = {Information and Inference: A Journal of the IMA},
+    volume = {10},
+    number = {2},
+    pages = {455-482},
+    year = {2020},
+    month = {08},
+    abstract = "{We consider the problem of distribution-free predictive inference, with the goal of producing predictive coverage guarantees that hold conditionally rather than marginally. Existing methods such as conformal prediction offer marginal coverage guarantees, where predictive coverage holds on average over all possible test points, but this is not sufficient for many practical applications where we would like to know that our predictions are valid for a given individual, not merely on average over a population. On the other hand, exact conditional inference guarantees are known to be impossible without imposing assumptions on the underlying distribution. In this work, we aim to explore the space in between these two and examine what types of relaxations of the conditional coverage property would alleviate some of the practical concerns with marginal coverage guarantees while still being possible to achieve in a distribution-free setting.}",
+    issn = {2049-8772},
+    doi = {10.1093/imaiai/iaaa017},
+    url = {https://doi.org/10.1093/imaiai/iaaa017},
+    eprint = {https://academic.oup.com/imaiai/article-pdf/10/2/455/38549621/iaaa017.pdf},
+}
+
+@article{barber2021b,
+author = {Rina Foygel Barber and Emmanuel J. Cand{\`e}s and Aaditya Ramdas and Ryan J. Tibshirani},
+title = {{Predictive inference with the jackknife+}},
+volume = {49},
+journal = {The Annals of Statistics},
+number = {1},
+publisher = {Institute of Mathematical Statistics},
+pages = {486 -- 507},
+keywords = {conformal inference, cross-validation, distribution-free, jackknife, leave-one-out, stability},
+year = {2021},
+doi = {10.1214/20-AOS1965},
+URL = {https://doi.org/10.1214/20-AOS1965}
+}
+
+@Article{lei2014,
+  author={Jing Lei and Larry Wasserman},
+  title={{Distribution-free prediction bands for non-parametric regression}},
+  journal={Journal of the Royal Statistical Society Series B},
+  year=2014,
+  volume={76},
+  number={1},
+  pages={71-96},
+  month={1},
+  keywords={},
+  doi={},
+  abstract={ type=\&quot;main\&quot; xml:id=\&quot;rssb12021-abs-0001\&quot;> We study distribution-free, non-parametric prediction bands with a focus on their finite sample behaviour. First we investigate and develop different notions of finite sample coverage guarantees. Then we give a new prediction band by combining the idea of ‘conformal prediction’ with non-parametric conditional density estimation. The proposed estimator, called COPS (conformal optimized prediction set), always has a finite sample guarantee. Under regularity conditions the estimator converges to an oracle band at a minimax optimal rate. A fast approximation algorithm and a data-driven method for selecting the bandwidth are developed. The method is illustrated in simulated and real data examples.},
+  url={https://ideas.repec.org/a/bla/jorssb/v76y2014i1p71-96.html}
+}
+
+
+@InProceedings{vovk2012,
+  title = 	 {Conditional Validity of Inductive Conformal Predictors},
+  author = 	 {Vovk, Vladimir},
+  booktitle = 	 {Proceedings of the Asian Conference on Machine Learning},
+  pages = 	 {475--490},
+  year = 	 {2012},
+  editor = 	 {Hoi, Steven C. H. and Buntine, Wray},
+  volume = 	 {25},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {Singapore Management University, Singapore},
+  month = 	 {11},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v25/vovk12/vovk12.pdf},
+  url = 	 {https://proceedings.mlr.press/v25/vovk12.html},
+  abstract = 	 {Conformal predictors are set predictors that are automatically valid in the sense of having coverage probability equal to or exceeding a given confidence level. Inductive conformal predictors are a computationally efficient version of conformal predictors satisfying the same property of validity. However, inductive conformal predictors have been only known to control unconditional coverage probability. This paper explores various versions of conditional validity and various ways to achieve them using inductive conformal predictors and their modifications.}
+}
+
+@misc{romano2020a,
+      title={Classification with Valid and Adaptive Coverage}, 
+      author={Yaniv Romano and Matteo Sesia and Emmanuel J. Candès},
+      year={2020},
+      eprint={2006.02544},
+      archivePrefix={arXiv},
+      primaryClass={stat.ME}
+}
+
+@article{guan2022,
+    author = {Guan, Leying},
+    title = "{Localized conformal prediction: a generalized inference framework for conformal prediction}",
+    journal = {Biometrika},
+    volume = {110},
+    number = {1},
+    pages = {33-50},
+    year = {2022},
+    month = {07},
+    abstract = "{We propose a new inference framework called localized conformal prediction. It generalizes the framework of conformal prediction by offering a single-test-sample adaptive construction that emphasizes a local region around this test sample, and can be combined with different conformal scores. The proposed framework enjoys an assumption-free finite sample marginal coverage guarantee, and it also offers additional local coverage guarantees under suitable assumptions. We demonstrate how to change from conformal prediction to localized conformal prediction using several conformal scores, and we illustrate a potential gain via numerical examples.}",
+    issn = {1464-3510},
+    doi = {10.1093/biomet/asac040},
+    url = {https://doi.org/10.1093/biomet/asac040},
+    eprint = {https://academic.oup.com/biomet/article-pdf/110/1/33/49160126/asac040.pdf},
+}
+
+@inproceedings{gibbs2021,
+ author = {Gibbs, Isaac and Candes, Emmanuel},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {M. Ranzato and A. Beygelzimer and Y. Dauphin and P.S. Liang and J. Wortman Vaughan},
+ pages = {1660--1672},
+ publisher = {Curran Associates, Inc.},
+ title = {Adaptive Conformal Inference Under Distribution Shift},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2021/file/0d441de75945e5acbc865406fc9a2559-Paper.pdf},
+ volume = {34},
+ year = {2021}
+}
+
+@misc{gibbs2023,
+      title={Conformal Prediction With Conditional Guarantees}, 
+      author={Isaac Gibbs and John J. Cherian and Emmanuel J. Candès},
+      year={2023},
+      eprint={2305.12616},
+      archivePrefix={arXiv},
+      primaryClass={stat.ME}
+}
+
+@misc{jung2022,
+      title={Batch Multivalid Conformal Prediction}, 
+      author={Christopher Jung and Georgy Noarov and Ramya Ramalingam and Aaron Roth},
+      year={2022},
+      eprint={2209.15145},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@InProceedings{kivaranovic2020a,
+  title = 	 {Adaptive, Distribution-Free Prediction Intervals for Deep Networks},
+  author =       {Kivaranovic, Danijel and Johnson, Kory D. and Leeb, Hannes},
+  booktitle = 	 {Proceedings of the Twenty Third International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {4346--4356},
+  year = 	 {2020},
+  editor = 	 {Chiappa, Silvia and Calandra, Roberto},
+  volume = 	 {108},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {8},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v108/kivaranovic20a/kivaranovic20a.pdf},
+  url = 	 {https://proceedings.mlr.press/v108/kivaranovic20a.html},
+  abstract = 	 {The machine learning literature contains several constructions for prediction intervals that are intuitively reasonable but ultimately ad-hoc in that they do not come with provable performance guarantees. We present methods from the statistics literature that can be used efficiently with neural networks under minimal assumptions with guaranteed performance. We propose a neural network that outputs three values instead of a single point estimate and optimizes a loss function motivated by the standard quantile regression loss. We provide two prediction interval methods with finite sample coverage guarantees solely under the assumption that the observations are independent and identically distributed. The first method leverages the conformal inference framework and provides average coverage. The second method provides a new, stronger guarantee by conditioning on the observed data. Lastly, our loss function does not compromise the predictive accuracy of the network like other prediction interval methods. We demonstrate the ease of use of our procedures as well as its improvements over other methods on both simulated and real data. As most deep networks can easily be modified by our method to output predictions with valid prediction intervals, its use should become standard practice, much like reporting standard errors along with mean estimates.}
+}
+
+@article{chernozhukov2021,
+author = {Victor Chernozhukov  and Kaspar Wüthrich  and Yinchu Zhu },
+title = {Distributional conformal prediction},
+journal = {Proceedings of the National Academy of Sciences},
+volume = {118},
+number = {48},
+pages = {e2107794118},
+year = {2021},
+doi = {10.1073/pnas.2107794118},
+URL = {https://www.pnas.org/doi/abs/10.1073/pnas.2107794118},
+eprint = {https://www.pnas.org/doi/pdf/10.1073/pnas.2107794118},
+abstract = {We propose a robust method for constructing conditionally valid prediction intervals based on models for conditional distributions such as quantile and distribution regression. Our approach can be applied to important prediction problems, including cross-sectional prediction, k–step-ahead forecasts, synthetic controls and counterfactual prediction, and individual treatment effects prediction. Our method exploits the probability integral transform and relies on permuting estimated ranks. Unlike regression residuals, ranks are independent of the predictors, allowing us to construct conditionally valid prediction intervals under heteroskedasticity. We establish approximate conditional validity under consistent estimation and provide approximate unconditional validity under model misspecification, under overfitting, and with time series data. We also propose a simple “shape” adjustment of our baseline method that yields optimal prediction intervals.}}
+
+@inproceedings{sesia2021,
+ author = {Sesia, Matteo and Romano, Yaniv},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {M. Ranzato and A. Beygelzimer and Y. Dauphin and P.S. Liang and J. Wortman Vaughan},
+ pages = {6304--6315},
+ publisher = {Curran Associates, Inc.},
+ title = {Conformal Prediction using Conditional Histograms},
+ volume = {34},
+ year = {2021}
+}
+% url ={https://proceedings.neurips.cc/paper_files/paper/2021/file/31b3b31a1c2f8a370206f111127c0dbd-Paper.pdf},
+
+
+
+@InProceedings{izbicki2020a,
+  title = 	 {Flexible distribution-free conditional predictive bands using density estimators},
+  author =       {Izbicki, Rafael and Shimizu, Gilson and Stern, Rafael},
+  booktitle = 	 {Proceedings of the Twenty Third International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {3068--3077},
+  year = 	 {2020},
+  editor = 	 {Chiappa, Silvia and Calandra, Roberto},
+  volume = 	 {108},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {8},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v108/izbicki20a/izbicki20a.pdf},
+  url = 	 {https://proceedings.mlr.press/v108/izbicki20a.html},
+  abstract = 	 {Conformal methods create prediction bands that control average coverage assuming solely i.i.d. data. Besides average coverage, one might also desire to control conditional coverage, that is, coverage for every new testing point. However, without strong assumptions, conditional coverage is unachievable. Given this limitation, the literature has focused on methods with asymptotical conditional coverage. In order to obtain this property, these methods require strong conditions on the dependence between the target variable and the features. We introduce two conformal methods based on conditional density estimators that do not depend on this type of assumption to obtain asymptotic conditional coverage: Dist-split and CD-split. While Dist-split asymptotically obtains optimal intervals, which are easier to interpret than general regions, CD-split obtains optimal size regions, which are smaller than intervals. CD-split also obtains local coverage by creating prediction bands locally on a partition of the features space. This partition is data-driven and scales to high-dimensional settings. In a wide variety of simulated scenarios, our methods have a better control of conditional coverage and have smaller length than previously proposed methods.}
+}
+
+@article{izbicki2022,
+  author  = {Rafael Izbicki and Gilson Shimizu and Rafael B. Stern},
+  title   = {CD-split and HPD-split: Efficient Conformal Regions in High Dimensions},
+  journal = {Journal of Machine Learning Research},
+  year    = {2022},
+  volume  = {23},
+  number  = {87},
+  pages   = {1--32},
+  url     = {http://jmlr.org/papers/v23/20-797.html}
+}
+
+@inproceedings{tibshirani,
+ author = {Tibshirani, Ryan J and Foygel Barber, Rina and Candes, Emmanuel and Ramdas, Aaditya},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Conformal Prediction Under Covariate Shift},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2019/file/8fb21ee7a2207526da55a679f0332de2-Paper.pdf},
+ volume = {32},
+ year = {2019}
+}
+
+
+@InProceedings{podkopaev,
+  title = 	 {Distribution-free uncertainty quantification for classification under label shift},
+  author =       {Podkopaev, Aleksandr and Ramdas, Aaditya},
+  booktitle = 	 {Proceedings of the Thirty-Seventh Conference on Uncertainty in Artificial Intelligence},
+  pages = 	 {844--853},
+  year = 	 {2021},
+  editor = 	 {de Campos, Cassio and Maathuis, Marloes H.},
+  volume = 	 {161},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v161/podkopaev21a/podkopaev21a.pdf},
+  url = 	 {https://proceedings.mlr.press/v161/podkopaev21a.html},
+  abstract = 	 {Trustworthy deployment of ML models requires a proper measure of uncertainty, especially in safety-critical applications. We focus on uncertainty quantification (UQ) for classification problems via two avenues — prediction sets using conformal prediction and calibration of probabilistic predictors by post-hoc binning — since these possess distribution-free guarantees for i.i.d. data. Two common ways of generalizing beyond the i.i.d. setting include handling <em>covariate</em> and <em>label</em> shift. Within the context of distribution-free UQ, the former has already received attention, but not the latter. It is known that label shift hurts prediction, and we first argue that it also hurts UQ, by showing degradation in coverage and calibration. Piggybacking on recent progress in addressing label shift (for better prediction), we examine the right way to achieve UQ by reweighting the aforementioned conformal and calibration procedures whenever some unlabeled data from the target distribution is available. We examine these techniques theoretically in a distribution-free framework and demonstrate their excellent practical performance.}
+}
+
+
+@InProceedings{chernozhukov2018,
+  title = 	 {Exact and Robust Conformal Inference Methods for Predictive Machine Learning with Dependent Data},
+  author =       {Chernozhukov, Victor and W\"{u}thrich, Kaspar and Yinchu, Zhu},
+  booktitle = 	 {Proceedings of the 31st  Conference On Learning Theory},
+  pages = 	 {732--749},
+  year = 	 {2018},
+  editor = 	 {Bubeck, Sébastien and Perchet, Vianney and Rigollet, Philippe},
+  volume = 	 {75},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v75/chernozhukov18a/chernozhukov18a.pdf},
+  url = 	 {https://proceedings.mlr.press/v75/chernozhukov18a.html},
+  abstract = 	 {We extend conformal inference to general settings that allow for time series data. Our proposal is developed as a randomization method and  accounts for potential serial dependence by including  block structures in the permutation scheme. As a result, the proposed method retains the exact, model-free validity when the data are i.i.d. or more generally exchangeable, similar to usual conformal inference methods.  When exchangeability fails, as is the case for common time series data, the proposed approach is approximately valid under weak assumptions on the conformity score.}
+}
+
+@article{barber2022,
+author = {Barber, Rina and Candès, Emmanuel and Ramdas, Aaditya and Tibshirani, Ryan},
+year = {2023},
+month = {4},
+pages = {},
+title = {Conformal prediction beyond exchangeability},
+volume = {51},
+journal = {The Annals of Statistics},
+doi = {10.1214/23-AOS2276}
+}
+
+@inproceedings{byol,
+author = {Kim, Byol and Xu, Chen and Barber, Rina Foygel},
+title = {Predictive inference is free with the jackknife+-after-bootstrap},
+year = {2020},
+isbn = {9781713829546},
+publisher = {Curran Associates Inc.},
+address = {Red Hook, NY, USA},
+abstract = {Ensemble learning is widely used in applications to make predictions in complex decision problems—for example, averaging models fitted to a sequence of samples bootstrapped from the available training data. While such methods offer more accurate, stable, and robust predictions and model estimates, much less is known about how to perform valid, assumption-lean inference on the output of these types of procedures. In this paper, we propose the jackknife+-after-bootstrap (J+aB), a procedure for constructing a predictive interval, which uses only the available bootstrapped samples and their corresponding fitted models, and is therefore "free" in terms of the cost of model fitting. The J+aB offers a predictive coverage guarantee that holds with no assumptions on the distribution of the data, the nature of the fitted model, or the way in which the ensemble of models are aggregated—at worst, the failure rate of the predictive interval is inflated by a factor of 2. Our numerical experiments verify the coverage and accuracy of the resulting predictive intervals on real data.},
+booktitle = {Proceedings of the 34th International Conference on Neural Information Processing Systems},
+articleno = {348},
+numpages = {12},
+location = {, Vancouver, BC, Canada, },
+series = {NIPS '20}
+}
+
+@InProceedings{chenxu2021a,
+  title = 	 {Conformal prediction interval for dynamic time-series},
+  author =       {Xu, Chen and Xie, Yao},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {11559--11569},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {7},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/xu21h/xu21h.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/xu21h.html},
+  abstract = 	 {We develop a method to construct distribution-free prediction intervals for dynamic time-series, called \Verb|EnbPI| that wraps around any bootstrap ensemble estimator to construct sequential prediction intervals. \Verb|EnbPI| is closely related to the conformal prediction (CP) framework but does not require data exchangeability. Theoretically, these intervals attain finite-sample, \textit{approximately valid} marginal coverage for broad classes of regression functions and time-series with strongly mixing stochastic errors. Computationally, \Verb|EnbPI| avoids overfitting and requires neither data-splitting nor training multiple ensemble estimators; it efficiently aggregates bootstrap estimators that have been trained. In general, \Verb|EnbPI| is easy to implement, scalable to producing arbitrarily many prediction intervals sequentially, and well-suited to a wide range of regression functions. We perform extensive real-data analyses to demonstrate its effectiveness.}
+}
+
+@misc{chenxu2021b,
+      title={Conformal prediction for time series}, 
+      author={Chen Xu and Yao Xie},
+      year={2023},
+      eprint={2010.09107},
+      archivePrefix={arXiv},
+      primaryClass={stat.ME}
+}
+
+@article{khosravi,
+  author={Khosravi, Abbas and Nahavandi, Saeid and Creighton, Doug},
+  journal={IEEE Transactions on Power Systems}, 
+  title={Construction of Optimal Prediction Intervals for Load Forecasting Problems}, 
+  year={2010},
+  volume={25},
+  number={3},
+  pages={1496-1503},
+  keywords={Load forecasting;Power system reliability;Power system modeling;Predictive models;Neural networks;Cost function;Uncertainty;Degradation;Load modeling;Length measurement;Load forecasting;neural network;prediction interval},
+  doi={10.1109/TPWRS.2010.2042309}}
+
+@book{hyndman,
+  title={Forecasting: principles and practice},
+  author={Hyndman, R.J. and Athanasopoulos, G.},
+  isbn={9780987507105},
+  url={https://books.google.es/books?id=gDuRBAAAQBAJ},
+  year={2014},
+  publisher={OTexts}
+}
