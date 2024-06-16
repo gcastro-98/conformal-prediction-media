@@ -3,8 +3,6 @@ name: Upload the .pdf found at "docs/" & deploy the page
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
   workflow_dispatch:
 
